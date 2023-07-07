@@ -1,0 +1,2 @@
+﻿topic: /unity/positions
+{ "time" : {43543543.98}, "positions" : { { "subject" : "test1", "position" : {"x" : 1.2, "y": 4.5, "z": 6.7}, "scale" : {"x" : 1, "y": 1, "z": 1} }, { "subject" : "test2", "position" : {"x" : 10.2, "y": 9.5, "z": 6.7} }, "scale" : {"x" : 5.4, "y": 1, "z": 1}  } }

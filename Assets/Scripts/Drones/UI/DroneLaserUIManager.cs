@@ -1,0 +1,148 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DroneLaserUIManager : MonoBehaviour
+{
+
+    SwarmController swarmController;
+    GameObject human1;
+    GameObject human2;
+    
+
+    public bool waitingForActivate = true;
+    public bool waitingForWanderWithSwarm = false;
+    public bool waitingForGoHome = false;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        swarmController = GameObject.Find("Drones").GetComponent<SwarmController>();
+        human1 = GameObject.Find("Human");
+        human2 = GameObject.Find("Human2");
+
+        var lr = transform.Find("Activate").GetComponent<LaserRectangle>();
+        lr.DoPulse();
+
+        waitingForActivate = false;
+        EnableActivate(false);
+        waitingForWanderWithSwarm = false;
+        EnableWanderWithSwarm(false);
+        waitingForGoHome = false;
+        EnableGoHome(false);
+    }
+
+    public void EnableStateMachine(bool started)
+    {
+        waitingForActivate = started;
+        EnableActivate(started);
+        waitingForWanderWithSwarm = false;
+        EnableWanderWithSwarm(false);
+        waitingForGoHome = false;
+        EnableGoHome(false);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (waitingForActivate)
+        {
+            var dist1 = GetDistanceToHuman(transform.Find("Activate").position, human1);
+            var dist2 = GetDistanceToHuman(transform.Find("Activate").position, human2);
+
+            if (dist1 < 0.4f || dist2 < 0.4f)
+            {
+                
+                waitingForActivate = false;
+                EnableActivate(false);
+                waitingForWanderWithSwarm = true;
+                EnableWanderWithSwarm(true);
+                waitingForGoHome = true;
+                EnableGoHome(true);
+                swarmController.ActivateSwarm();
+            }
+        } else
+        {
+            waitingForActivate = false;
+            EnableActivate(false);
+        }
+
+        if (waitingForWanderWithSwarm)
+        {
+            var dist1 = GetDistanceToHuman(transform.Find("WanderWithSwarm").position, human1);
+            var dist2 = GetDistanceToHuman(transform.Find("WanderWithSwarm").position, human2);
+
+            if (dist1 < 0.4f || dist2 < 0.4f)
+            {
+                waitingForActivate = false;
+                EnableActivate(false);
+                waitingForWanderWithSwarm = false;
+                EnableWanderWithSwarm(false);
+                waitingForGoHome = true;
+                EnableGoHome(true);
+                swarmController.WanderWithSwarm();
+            }
+        } else
+        {
+            waitingForWanderWithSwarm = false;
+            EnableWanderWithSwarm(false);
+        }
+
+        if (waitingForGoHome)
+        {
+            var dist1 = GetDistanceToHuman(transform.Find("GoHome").position, human1);
+            var dist2 = GetDistanceToHuman(transform.Find("GoHome").position, human2);
+
+            if (dist1 < 0.4f || dist2 < 0.4f)
+            {
+                waitingForActivate = true;
+                EnableActivate(true);
+                waitingForWanderWithSwarm = false;
+                EnableWanderWithSwarm(false);
+                waitingForGoHome = false;
+                EnableGoHome(false);
+                swarmController.GoHome();
+            }
+        } else
+        {
+            waitingForGoHome = false;
+            EnableGoHome(false);
+        }
+    }
+
+    private void EnableActivate(bool enable)
+    {
+        var lb = transform.Find("Activate").GetComponent<LaserBehaviour>();
+        var lr = transform.Find("Activate").GetComponent<LaserRectangle>();
+        lb.visible = enable;
+        lr.drawGizmos = enable;
+    }
+
+    private void EnableWanderWithSwarm(bool enable)
+    {
+        var lb = transform.Find("WanderWithSwarm").GetComponent<LaserBehaviour>();
+        var lr = transform.Find("WanderWithSwarm").GetComponent<LaserRectangle>();
+        lb.visible = enable;
+        lr.drawGizmos = enable;
+    }
+
+    private void EnableGoHome(bool enable)
+    {
+        var lb = transform.Find("GoHome").GetComponent<LaserBehaviour>();
+        var lr = transform.Find("GoHome").GetComponent<LaserRectangle>();
+        lb.visible = enable;
+        lr.drawGizmos = enable;
+    }
+
+    private float GetDistanceToHuman(Vector3 position, GameObject human)
+    {
+        if(human != null)
+        {
+            return Vector3.Distance(position, human.transform.position);
+        } else
+        {
+            return float.PositiveInfinity;
+        }
+    }
+
+}

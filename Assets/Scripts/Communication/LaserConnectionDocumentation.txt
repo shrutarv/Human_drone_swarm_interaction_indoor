@@ -1,0 +1,25 @@
+topic: /unity/laser/vicon/animation
+
+subject (REQUIRED) : Vicon subject name 
+duration (OPTIONAL, DEFAULT = 1): duration of visibility in seconds 
+color (OPTIONAL, DEFAULT = white): HTML color: red, cyan, blue, darkblue, lightblue, purple, yellow, lime, fuchsia, white, silver, grey, black, orange, brown, maroon, green, olive, navy, teal, aqua, magenta ODER Hexadecimal #RRGGBB z.B. # #00FF00 für grün
+shape (OPTIONAL, DEFAULT = "rectangle"): shape of laserobject = rectangle OR circle
+pointCount (OPTINAL, DEFAULT = 1): points on the circle, otherwise not used, 16 points is a good number for a round circle, use 3 points for triangle, 4 points for rectangle, and so on
+xscale (OPTIONAL, DEFAULT = 1): scale in x direction, only for rectangle
+yscale (OPTIONAL, DEFAULT = 1): scale in y direction, only for rectangle
+animation (OPTIONAL, DEFAULT = none): none = static picture, pulse = pulsating picture
+visible (OPTIONAL, DEFAULT = true): set this to false to clear picture immedeately
+
+Example:
+
+paint pulsating red rectangle with specific scale values for Vicon subject AS_2_neu
+{ "subject" : "AS_2_neu", "duration" : 7.5, "color" : "red", "shape" : "rectangle", "xscale" : 1.5, "yscale" :  2,  "animation" : "pulse"  } 
+
+paint pulsating green circle of size 1.5 for Vicon subject AS_2_neu
+{ "subject" : "AS_2_neu", "duration" : 7.5, "color" : "green", "shape" : "circle", "pointCount" : 16, "animation" : "pulse"  } 
+
+clear lasershape for Vicon subject AS_2_neu
+{ "subject" : "AS_2_neu", "visible" : false }
+
+this will not show because vsisble is set to false:
+{ "subject"   : "AS_5_neu", "duration" : 60, "color" : "magenta", "shape" : "rectangle",  "xscale" : 1, "yscale" :  1,  "animation" : "pulse", "visible" : false} 

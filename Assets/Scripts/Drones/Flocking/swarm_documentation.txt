@@ -1,0 +1,130 @@
+Swarm Documentation
+
+1 Introduction
+The following paragraphs outline the general requirements and design goals of the swarm software.
+
+1.1 Simulation mode versus Live-control mode
+The swarm can be used in simulation mode and in live-control mode. Both modes are controlled by the same software implementation. The architecture supports both modes and their specific needs. The goal is to be able to develop the swarm within the simulation and then test it via live-control in the real world. 
+
+The swarm simulation mode helps to develop physical swarms by providing an architecture in which swarm behaviors can be rapidly developed and tested with different parameter sets. All randomized parameters should be seeded for repeatability of test scenarios. The software architecture has to be able to automatically control all aspects of the swarm lifecycle without manual user interaction.
+
+The live-control mode of a physical swarm uses a communication link to regularly issue movement commands to the robotic systems (i.e. drones, other robots). This creates a control loop between the swarm system and the actual robotic system. The swarm system has to be able to react to disturbances and irregular behavior of the physical objects. Manual interaction by the user has to be supported at all times for emergency situations.
+
+1.2 Preparation for Reinforcement Learning
+For the use of reinforcement learning, the software architecture needs to provide an easy way to modify all parameters of the swarm and gather monitoring data for evaluation of the swarm performance and failure conditions. It should be possible to rapidly create new simulations runs with different parameter sets. 
+
+For reinforcment learning in live-control mode, it should be possible to run several live-control runs within the running time of the physical robot system. Between each run, the physical robots have to be returned to their starting positions. This should be done with as little human interaction as possible.
+
+Human interaction with the swarm has to be recorded (i.e. human moves through the swarm) in live-control mode once. The recording can then be used in simulation runs or in automated live-control runs.
+
+1.3 Use of machine learning for optimizing the simulation
+The simulation mode and live-control mode could be used simultaneously to compare the differences in movement while executing the same commands issued by the swarm system. Use this data to tweak the simulation parameters to approximate real-world behavior within the simulation. This would benefit simulated reinforcement learning runs.
+
+In a later production system, this could be used to monitor and adapt the behavior of the swarm in changing industrial environments. 
+
+1.4 Logistics Scenario
+The swarm should be developed to support logistics scenarios by executing transport orders. For reinforcement learning, suitable logistics performance indicators should be provided (i.e. throughput, lead times, etc.). The goal is to create a logistics swarm system which adapts the standard swarm algorithmns to logsitics needs and optimizes itself through reinforcement learning.
+
+1.5 Demonstrator Use-case
+The demonstrator is a special case of the live-control mode. It is manually controlled and focusses on human-machine interaction. The duration of a demonstrator run is completely controlled by a human operator via the user-interace of the software (i.e. button clicking). In the logistics scenario, the creation of transport orders is made via human interaction with the motion capturing system (see section 6).
+
+2 Swarm Overview
+
+A swarm consists of individual entities called boids. In our system there are two types of boids: autonomous boids and moving obstacle boids. Autonomous boids represent robots and consist of two parts: a physical body and a virtual leading object. An moving obstacle boid represents an object that takes part in the swarm system but is controlled from the outside (i.e. a human, a box, a workstation, etc.). 
+
+Each autonomous boid is guided by a set of parametrized behaviors that influence its movements. The behaviors are executed sequentially within a control loop and influence the velocity and rotation of the leading object. Within fixed intervals, the leading object sends a control message to the underlying robotic system (real or simulated) to affect the movement of the physical body. The leading object stays in the vincinity of the physical object, especially if the physical body does somehow not follow the commands.
+
+The interplay between the individual and relatively simple boid behaviors creates an emergent and complex swarm behavior. This can be influenced through a set of parameters: the sequence in which the behaviors are executed, the degree of influence each behavior has over the movement of the boid, and behavior-specific parameters (for example, minimal or maximal distances to neighbours).
+
+3 General behaviors
+
+General behaviors affect all boids in a swarm and can be categorized by how they are influenced from the environment and by what influence they exercise on the boid. Individual behaviors are only affected by their position within the physical environment and their specific parameters. They can represent the goals of the individual boid. The actual swarm behaviors observe nearby neighbours of the boid and represent a form of communication-free coordination. 
+
+3.1 Wandering (influenced by: individual; influences: rotation, velocity)
+Wandering lets the boid move around by randomly changing the rotation a few degrees every other moment. It is a kind of aimless movement that nevertheless leads to exploration of the environment.
+
+3.2 Pursuit (influenced by: individual; influences: rotation, velocity / not implemented yet)
+A boid in pursuit will rotate to face a given target and moves in that direction until the target is reached. 
+
+3.3 Fencing (influenced by: individual; influences: rotation)
+Fencing will keep the boid within the confines of a specific area. It checks if the boid is near the fence and, if this is the case, will rotate the boid back towards the center of the area.
+
+3.4 Separation (influenced by: swarm; influences: rotation)
+Separation avoids collision of nearby boids. It computes the average direction vector to the neighbours and then rotates the boid in the inverse direction, away from any possible collision. Each boid has an individual separation-distance parameter based on its physical size that is used by other boids.
+
+3.5 Alignment (influenced by: swarm; influences: rotation)
+Alignment creates the typical behavior of bird swarms, it computes the average direction vector of the neighbouring boids and rotates the boid to move in the same direction, together with the swarm.
+
+3.6 Cohesion (influenced by: swarm; influences: rotation)
+Cohesion computes the average position of the neighbouring boids and rotates the boid towards the center of the swarm. This can keep a swarm together which could otherwise be separated through the influence of other behaviors.
+
+3.7 Typical interplay between general behaviors
+Wandering and Pursuit are mutually exclusive behaviors which could be switched on and off by a statemachine: either a boid is exploring freely or it follows a specific goal. Fencing keeps the swarm in a specific area which a good thing when running in a physical research lab with real robots. The rotation away from the fence to the center combines well with Wandering, as it creates a natural-looking movement. When given a pursuit target outside of the fence the boid will oscillate and stay on the position at the fence that is nearest to the target.
+
+Separation is a crucial behavior that combines sensibly with Fencing and Alignment. If a swarm encounters a fence the boids at the front change direction to the center, and following boids will turn to the center because of Separation causing the whole swarm turning to the center as well. Alignment will cause independent boids to rotate to the same direction before coming into collision distance, this will create a new swarm. If a swarm encounters an obstacle boid then Separation can lead to a split of the swarm since the boids directly in fromt of the obstacle will turn around while the unaffected boids will continue.
+
+4 Entity-specific behaviors and parameters
+
+As autnomous boids represent robotic systems that dictate the physical capabilities of their behaviors, they may add specific behaviors to accommodate specific restrictions. For example, a drone has to start before moving and has to land before running out of battery power. As such, a drone boid will need a Starting and a Landing behavior.
+
+While drones can change direction on the spot (depending on their velocity) a typical wheel-based robot will need to rotate relatively slowly. Other robotic systems may need special consideration concerning the change of velocity, like planes and ships, as they cannot stand still or brake rapidly. As such, the behavior parameters have to be tuned to the specific capabilities of underlying systems. For example, a boid with slow rotation may need to reduce its velocity to avoid a collision or might increase the distance from which the separation behavior is triggered to start rotation early enough.
+
+5 Use-case-specific meta-behaviors
+
+A swarm that is used to perform a specific task adds meta-behaviors to its boids that may activate and configure general behaviors, communicate with higher-level systems, or trigger environment-changing actions. In a logistics use-case, a Transport meta-behavior would accept an order, deactivate Wandering, and set the Pursuit target to the source in the materialflow system. Then, it would collect the load and change the Pursuit target to the order destination. Crucial safety-critical behaviors like Fencing and Separation would stay in effect, enabling the swarm to carry-out several orders simultaneously. Behaviors like Alignment and Cohesion could be used to form batches of transporting boids.
+
+The performance of a task-oriented swarm is highly dependend on the parameters of the behaviors in combination with the use-case. Tuning the parameters can easily become a complex task that is predispositioned to optimization, for example, machine-learning algorithmns.
+
+5.1 Transportation meta-behavior for drones (not implemented yet)
+The transportation meta-behavior controls the lifecycle of a drone boid and activates other general behaviors depending on the situation. It is governed by the following states:
+
+-Deactivated: It starts in the deactivated state when the drone is landed. If it receives an activation command it goes into resting state and switches on its autonomous control. While in autonomous control, it decides what action it takes by observing the environment.
+ 
+-Resting: It starts in resting state when the drone is landed, and issues a start command. When the start is finished it switches to searching state. The initial resting position is saved to be able to return later.
+ 
+-Searching: On entry of searching state the wandering behavior is activated to explore the area and search for transportation targets. If a transportation target is found nearby it tries to get the transport order by negotiating with other drone boids.
+ 
+-Pickup: On succesfully getting the transport order the wandering behavior is switched off and the pursuit behavior is activated with the transport item set as the target.
+
+-Delivery: On arriving at the transport item, it is picked up and the pursuit target is set to the destination.
+
+-Dropoff: On arriving at the destination, the transport item is dropped and it switches to searching state
+
+-GoHome: On receiving a go-home command, the drone boid leaves autonomous control and sets the pursuit target to the saved resting position. On arrival, it lands an goes into deactivated state. It computes the estimated time for arrival, and if the pursuit takes too long, it switches for a short time to wandering behavior to evade certain deadlock situations with other drones that are also going home.
+
+6 Testbed for swarm systems
+TBD (explanation of testbed infrastructure)
+
+7 Implementation
+The swarm system is implemented in Unity 3D.
+
+7.1 SwarmCreator 
+The swarm creator is responsible for creating and deleting boids within the environment. It can generate random starting positions of boids based on a random seed or take a specific list of start positions.
+
+7.2 SwarmController
+The swarm controller executes swarm-wide commands to control a use-case. It delivers general swarm-wide performance results and failure conditions. It is used to start and stop meta-behaviors like the transport behavior for the whole swarm. 
+
+7.3 TransportManager
+For the logistics use-case, the TransportManager contains a list of transport orders that can be randomly generated based on a random seed. The attributes of the TransportManager are contained in a separate class and are assigned during initialization. In demonstrator live-control mode, the transport orders are generated via the user interface or the motion capturing system by human operators.
+
+7.4 Boids (and LeaderController / BoidController)
+Boids contain a set of individual attributes (right now, only an individual separation-distance) and a map of behaviors. The integer keys of the map indicate the sequence in which the behaviors are executed within the control loop. The attributes of a boid are contained in a separate class and are assigned during initialization.
+
+7.5 Behaviors
+Each behavior has its own set of attributes. General available attributes are activation and degree of influence on rotation and velocity. Specific attributes include minimal and maximal distance of neighbours for swarm behaviors, or a target position for pursuit. The attributes of a behavior are contained in a separate class and are assigned during initialization.
+
+7.6 SwarmSimulationManager
+The simulation manager starts a simulation run using the SwarmCreator and SwarmController. It can end the run either after an amount of time or an event delivered by the SwarmController (all transport orders executed). After a completed run it resets the environment. 
+
+7.7 SwarmParameters
+This class is a collection of all attribute classes of the swarm and global simulation parameters. It is given to the simulation manager to create a specific, repeatable simulation run. 
+
+
+
+
+
+
+
+
+
+
