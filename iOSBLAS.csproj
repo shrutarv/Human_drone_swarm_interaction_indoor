@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{EC9F84A2-D14B-B39C-01BF-D9A0B307E06D}</ProjectGuid>
+    <ProjectGuid>{59441EB2-977A-3314-0000-61A615820D3A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>iOSBLAS</AssemblyName>
@@ -261,52 +261,52 @@
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="M2Mqtt.Net">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Assets/Libs/M2Mqtt.Net.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Assets/Libs/M2Mqtt.Net.dll</HintPath>
     </Reference>
     <Reference Include="MathNet.Numerics">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Assets/Libs/MathNet.Numerics.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Assets/Libs/MathNet.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Assets/Libs/Newtonsoft.Json.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Assets/Libs/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Stateless">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Assets/Libs/Stateless.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Assets/Libs/Stateless.dll</HintPath>
     </Reference>
     <Reference Include="ViconDataStreamSDK_CSharp">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Assets/Libs/ViconDataStreamSDK_CSharp.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Assets/Libs/ViconDataStreamSDK_CSharp.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Abstractions">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Assets/ML-Agents/Plugins/System.IO.Abstractions.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Assets/ML-Agents/Plugins/System.IO.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Abstractions.TestingHelpers">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Assets/ML-Agents/Plugins/System.IO.Abstractions.TestingHelpers.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Assets/ML-Agents/Plugins/System.IO.Abstractions.TestingHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Barracuda">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Assets/ML-Agents/Plugins/Barracuda.Core/Barracuda/Barracuda.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Assets/ML-Agents/Plugins/Barracuda.Core/Barracuda/Barracuda.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Assets/ML-Agents/Plugins/ProtoBuffer/Google.Protobuf.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Assets/ML-Agents/Plugins/ProtoBuffer/Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="Grpc.Core">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Assets/ML-Agents/Plugins/ProtoBuffer/Grpc.Core.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Assets/ML-Agents/Plugins/ProtoBuffer/Grpc.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Interactive.Async">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Assets/ML-Agents/Plugins/ProtoBuffer/System.Interactive.Async.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Assets/ML-Agents/Plugins/ProtoBuffer/System.Interactive.Async.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Library/PackageCache/com.unity.ads@3.4.4/Editor/UnityEditor.Advertisements.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Library/PackageCache/com.unity.ads@3.4.4/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.13f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -663,10 +663,10 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.13f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/Artemis/Downloads/Drone-Unity-Simulaion-main/Drone-Unity-Simulaion-main/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/Artemis/Documents/code/phynetsim_2/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>
