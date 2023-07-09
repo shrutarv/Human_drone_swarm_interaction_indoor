@@ -65,21 +65,6 @@ public class LaserLineRenderer : MonoBehaviour
     }
 
 
-    // Update is called once per frame
-    public void Update()
-    {
-        if (pointMode && floor != null && Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.transform == floor.transform)
-                {
-                    points.Add(new Vector3(hit.point.x, hit.point.y + 0.01f, hit.point.z));
-                }
-            }
-        }
-    }
 
     public class LaserAdapter : LaserGraphicsShape
     {

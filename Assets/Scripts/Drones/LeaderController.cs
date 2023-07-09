@@ -16,12 +16,16 @@ public class LeaderController : MonoBehaviour
 
     public Boid boid;
     public List<Boid> boids;
+    public List<ObstacleBoid> obstacleBoids;
     public bool isWanderingActive = false;
     public Wandering3D wanderingBehavior = new Wandering3D();
     public bool isPursuitActive = false;
 
     public Pursuit pursuitBehavior = new Pursuit();
     public InferenceAgent pursuitInferenceAgent;
+
+    public bool isEncircleHumanActive = false;
+
 
     public bool isUpperFencingActive = true;
     public Fencing3D upperFencingBehavior = new Fencing3D();

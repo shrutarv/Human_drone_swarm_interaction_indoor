@@ -29,7 +29,7 @@ public class LaserRenderer : MonoBehaviour
 			{
 				return Beyond.ldbBeyondExeStarted() == 1 && Beyond.ldbBeyondExeReady() == 1;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				return false;
 			}
@@ -153,8 +153,8 @@ public class LaserRenderer : MonoBehaviour
         clientStream.Flush();*/
 		if (ConnectionState == State.Idle || ConnectionState == State.FatalError)
 		{
-			try
-			{
+            try
+            {
 				InitializeBeyond();
 			}
 			catch (DllNotFoundException e)
@@ -162,8 +162,8 @@ public class LaserRenderer : MonoBehaviour
 				ConnectionState = State.FatalError;
 				Debug.Log(e.Message, this);
 			}
-			catch (Exception e)
-			{
+			catch (Exception)
+            {
 				// Just try to connect.
 			}
 			ConnectionState = State.Connecting;

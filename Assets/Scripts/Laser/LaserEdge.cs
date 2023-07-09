@@ -20,9 +20,8 @@ public class LaserEdge : LaserLineRenderer
     }
 
     // Update is called once per frame
-    public new void Update()
+    public void Update()
     {
-        base.Update();
 
         var diff = sink.position - source.position;
         points[0] = source.position;

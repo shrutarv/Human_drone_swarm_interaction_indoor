@@ -39,7 +39,7 @@ namespace ClassicConsoleApp1
                 {
                     ViconClient = new ViconDataStreamSDK.CSharp.Client();
                 }
-                catch (DllNotFoundException e)
+                catch (DllNotFoundException)
                 {
                     Debug.Log("Could not connect to Vicon");
                     return;

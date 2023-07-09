@@ -9,6 +9,7 @@ public class SwarmCreator : MonoBehaviour
     public int createNextDroneId;
     public GameObject floor;
     public List<Boid> boids = new List<Boid>();
+    public List<ObstacleBoid> obstacleBoids = new List<ObstacleBoid>();
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class SwarmCreator : MonoBehaviour
         {
             //Debug.Log($"Found Obstacle: {obstacle.name}");
             boids.Add(obstacle.GetBoid());
+            obstacleBoids.Add(obstacle);
         }
     }
 
@@ -97,6 +99,7 @@ public class SwarmCreator : MonoBehaviour
                 leaderController.droneController = droneController;
                 leaderController.boid = boid;
                 leaderController.boids = boids;
+                leaderController.obstacleBoids = obstacleBoids;
 
                 var transportStateMachine = leader.AddComponent<TransportStateMachine>();
 

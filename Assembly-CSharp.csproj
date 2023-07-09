@@ -201,6 +201,7 @@
     <Compile Include="Assets\Scripts\Drones\Flocking\Boid.cs" />
     <Compile Include="Assets\Scripts\Drones\Flocking\Cohesion.cs" />
     <Compile Include="Assets\Scripts\Drones\Flocking\DroneFenceVisualization.cs" />
+    <Compile Include="Assets\Scripts\Drones\Flocking\Encircling.cs" />
     <Compile Include="Assets\Scripts\Drones\Flocking\Fencing.cs" />
     <Compile Include="Assets\Scripts\Drones\Flocking\Fencing3D.cs" />
     <Compile Include="Assets\Scripts\Drones\Flocking\GameManager.cs" />
