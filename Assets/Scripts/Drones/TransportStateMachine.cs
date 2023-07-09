@@ -21,6 +21,7 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
         DoneLanding,
         WanderAlone,
         WanderWithSwarm,
+        EncircleHuman,
         SwitchToUpperFence,
         SwitchToLowerFence,
         GoHome,
@@ -44,6 +45,7 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
         Wandering,
         WanderingAlone,
         WanderingWithSwarm,
+        EncirclingHuman,
         GoingHome,
         RepositioningWhileGoingHome,
         Transporting,
@@ -89,6 +91,7 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
             .OnEntry(HandleStarted)
             .Permit(Trigger.WanderAlone, State.WanderingAlone)
             .Permit(Trigger.WanderWithSwarm, State.WanderingWithSwarm)
+            .Permit(Trigger.EncircleHuman, State.EncirclingHuman)
             .Permit(Trigger.GoHome, State.GoingHome)
             .Permit(Trigger.Land, State.Landing);
 
@@ -113,6 +116,7 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
             .OnEntry(HandleWanderingAlone)
             .PermitReentry(Trigger.SwitchToUpperFence)
             .PermitReentry(Trigger.SwitchToLowerFence)
+            .Permit(Trigger.EncircleHuman, State.EncirclingHuman)
             .Permit(Trigger.WanderWithSwarm, State.WanderingWithSwarm);
 
         _machine.Configure(State.WanderingWithSwarm)
@@ -120,6 +124,14 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
             .OnEntry(HandleWanderingWithSwarm)
             .PermitReentry(Trigger.SwitchToUpperFence)
             .PermitReentry(Trigger.SwitchToLowerFence)
+            .Permit(Trigger.EncircleHuman, State.EncirclingHuman)
+            .Permit(Trigger.WanderAlone, State.WanderingAlone);
+
+        _machine.Configure(State.EncirclingHuman)
+            .SubstateOf(State.Wandering)
+            .OnEntry(HandleEncirclingHuman)
+            .PermitReentry(Trigger.Reposition)
+            .Permit(Trigger.WanderWithSwarm, State.WanderingWithSwarm)
             .Permit(Trigger.WanderAlone, State.WanderingAlone);
 
         _machine.Configure(State.Transporting)
@@ -175,6 +187,10 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
     public float timeDistanceToSinkDidNotDecrease = 0;
     public float repositionWhileGoingToSinkTime = 0;
 
+    public float lastDistanceToEncircleTarget = 0;
+    public float timeDistanceToEncircleTargetDidNotDecrease = 0;
+    public float repositionWhileEncirclingTime = 0;
+
     private TransportOrder TransportOrder;
 
 
@@ -221,6 +237,11 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
             MonitorRepositioningWhileGoingToSink();
         }
 
+        if (_machine.IsInState(State.EncirclingHuman))
+        {
+            MonitorEncirclingHuman();
+        }
+
     }
 
     public bool CanTransport()
@@ -265,6 +286,7 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
         leaderController.pursuitBehavior.SetTarget(null);
         leaderController.leadingDroneActive = false;
         leaderController.isPursuitActive = false;
+        leaderController.isEncircleHumanActive = false;
         leaderController.isAlignmentActive = false;
         leaderController.isCohesionActive = false;
         leaderController.isWanderingActive = false;
@@ -290,6 +312,7 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
         leaderController.pursuitBehavior.SetTarget(null);
         leaderController.leadingDroneActive = false;
         leaderController.isPursuitActive = false;
+        leaderController.isEncircleHumanActive = false;
         leaderController.isAlignmentActive = false;
         leaderController.isCohesionActive = false;
         leaderController.isWanderingActive = false;
@@ -314,6 +337,7 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
 
         leaderController.leadingDroneActive = true;
         leaderController.isPursuitActive = true;
+        leaderController.isEncircleHumanActive = false;
         leaderController.isAlignmentActive = false;
         leaderController.isCohesionActive = false;
         leaderController.isWanderingActive = false;
@@ -359,6 +383,7 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
         leaderController.pursuitBehavior.SetTarget(null);
         leaderController.leadingDroneActive = true;
         leaderController.isPursuitActive = false;
+        leaderController.isEncircleHumanActive = false;
         leaderController.isAlignmentActive = false;
         leaderController.isCohesionActive = false;
         leaderController.isWanderingActive = true;
@@ -386,6 +411,7 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
         leaderController.pursuitBehavior.SetTarget(null);
         leaderController.leadingDroneActive = true;
         leaderController.isPursuitActive = false;
+        leaderController.isEncircleHumanActive = false;
         leaderController.isAlignmentActive = false;
         leaderController.isCohesionActive = false;
         leaderController.isWanderingActive = true;
@@ -399,9 +425,59 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
         leaderController.pursuitBehavior.SetTarget(null);
         leaderController.leadingDroneActive = true;
         leaderController.isPursuitActive = false;
+        leaderController.isEncircleHumanActive = false;
         leaderController.isAlignmentActive = true;
         leaderController.isCohesionActive = true;
         leaderController.isWanderingActive = true;
+    }
+
+
+    // public float lastDistanceToEncircleTarget = 0;
+    //public float timeDistanceToEncircleTargetDidNotDecrease = 0;
+    //public float repositionWhileEncirclingTime = 0;
+
+    private void HandleEncirclingHuman(StateMachine<State, Trigger>.Transition t)
+    {
+        if (t.Trigger == Trigger.SwitchToUpperFence) leaderController.isUpperFencingActive = true; //i should not have done this
+        if (t.Trigger == Trigger.SwitchToLowerFence) leaderController.isUpperFencingActive = false;
+        leaderController.currentHuman = leaderController.encirclingBehavior.GetRandomObstacleBoid();
+        leaderController.encircleAngle = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+        leaderController.encircleDistance = leaderController.currentHuman.boid.SeparationDistance + UnityEngine.Random.Range(0, 1f);
+        leaderController.targetPosition = leaderController.encirclingBehavior.GetEncirclingPosition(leaderController.currentHuman.boid, leaderController.encircleAngle, leaderController.encircleDistance);
+        leaderController.pursuitBehavior.SetTarget(leaderController.targetPosition);
+        leaderController.leadingDroneActive = true;
+        leaderController.isPursuitActive = true;
+        leaderController.isEncircleHumanActive = true;
+        leaderController.isAlignmentActive = false;
+        leaderController.isCohesionActive = false;
+        leaderController.isWanderingActive = false;
+    }
+
+    private void MonitorEncirclingHuman()
+    {
+
+        var distanceToEncircleTarget = leaderController.pursuitBehavior.GetDistanceFromLeaderToTarget();
+        var distanceChange = Math.Abs(lastDistanceToEncircleTarget - distanceToEncircleTarget);
+
+        if (distanceChange < 0.05f)
+        {
+            timeDistanceToEncircleTargetDidNotDecrease += Time.deltaTime;
+        }
+        else
+        {
+            timeDistanceToEncircleTargetDidNotDecrease = 0;
+        }
+
+        if (timeDistanceToEncircleTargetDidNotDecrease > 5)
+        {
+            Fire(Trigger.Reposition);
+        }
+
+        if (leaderController.pursuitBehavior.HasDroneReachedTarget())
+        {
+            Fire(Trigger.Reposition);
+        }
+        lastDistanceToEncircleTarget = distanceToEncircleTarget;
     }
 
     private void HandleGoingToSource(StateMachine<State, Trigger>.Transition t)
@@ -412,6 +488,7 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
 
         leaderController.leadingDroneActive = true;
         leaderController.isPursuitActive = true;
+        leaderController.isEncircleHumanActive = false;
         leaderController.isAlignmentActive = false;
         leaderController.isCohesionActive = false;
         leaderController.isWanderingActive = false;
@@ -438,6 +515,7 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
 
         leaderController.leadingDroneActive = true;
         leaderController.isPursuitActive = true;
+        leaderController.isEncircleHumanActive = false;
         leaderController.isAlignmentActive = false;
         leaderController.isCohesionActive = false;
         leaderController.isWanderingActive = false;
@@ -479,6 +557,7 @@ public class TransportStateMachine : MonoBehaviour, IDroneControllerListener
         leaderController.pursuitBehavior.SetTarget(null);
         leaderController.leadingDroneActive = true;
         leaderController.isPursuitActive = false;
+        leaderController.isEncircleHumanActive = false;
         leaderController.isAlignmentActive = false;
         leaderController.isCohesionActive = false;
         leaderController.isWanderingActive = true;

@@ -8,12 +8,40 @@ public class Encircling
     public float MinDist { get; set; } = 1.0f;
     public float MaxDist { get; set; } = 1.8f;
 
+    public List<ObstacleBoid> obstacleBoids;
+
     public Transform Transform;
 
-    public void Init(int id, Transform transform)
+    public void Init(int id, Transform transform, List<ObstacleBoid> obstacleBoids)
     {
         Id = id;
         this.Transform = transform;
+        this.obstacleBoids = obstacleBoids;
+    }
+
+    public ObstacleBoid GetRandomObstacleBoid()
+    {
+        if (obstacleBoids.Count > 0)
+        {
+            return obstacleBoids[Random.Range(0, obstacleBoids.Count)];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public Vector3? GetTargetPosition(Boid boid, float angle, float distance)
+    {
+        if (boid != null && Id != boid.Id)
+        {
+
+            Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            Vector2 position = direction * distance;
+            return boid.Body.position + new Vector3(position.x, 0, position.y);
+        }
+
+        return null;
     }
 
 
@@ -39,4 +67,28 @@ public class Encircling
         return result;
     }
 
+    public float GetRandomAngle()
+    {
+        return Random.Range(0, 2 * Mathf.PI);
+    }
+
+    public Vector2 GetRandomPosition2D(Transform referenceTransform, float minDistance, float maxDistance)
+    {
+        // Generate a random direction in 2D
+        float randomAngle = Random.Range(0, 2 * Mathf.PI);
+        Vector2 randomDirection = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle));
+
+        // Randomize distance
+        float randomDistance = Random.Range(minDistance, maxDistance);
+
+        // Scale the random direction by the random distance
+        Vector2 randomPosition = randomDirection * randomDistance;
+
+        // Translate this random position based on the reference transform
+        randomPosition = (Vector2)referenceTransform.position + randomPosition;
+
+        return randomPosition;
+    }
+
+    
 }

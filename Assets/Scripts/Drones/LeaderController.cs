@@ -25,6 +25,10 @@ public class LeaderController : MonoBehaviour
     public InferenceAgent pursuitInferenceAgent;
 
     public bool isEncircleHumanActive = false;
+    public ObstacleBoid currentHuman = null;
+    public float encircleAngle = 0f;
+    public float encircleDistance = 0f;
+    public Encircling encirclingBehavior = new Encircling();
 
 
     public bool isUpperFencingActive = true;
@@ -48,6 +52,7 @@ public class LeaderController : MonoBehaviour
         targetPosition = transform.position;
         wanderingBehavior.Init(transform);
         pursuitBehavior.Init(transform, droneController.transform);
+        encirclingBehavior.Init(droneController.id, transform, obstacleBoids);
 
         pursuitInferenceAgent = GetComponent<InferenceAgent>();
 
@@ -64,16 +69,16 @@ public class LeaderController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit) && Input.GetMouseButtonDown(0))
-        {
-            if (hit.transform == droneController.GetConnection().GetFloor().transform)
-            {
-                targetPosition = new Vector3(hit.point.x, hit.point.y + 0.5f, hit.point.z);
-                pursuitBehavior.SetTarget(targetPosition);
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //if (Physics.Raycast(ray, out RaycastHit hit) && Input.GetMouseButtonDown(0))
+        //{
+        //    if (hit.transform == droneController.GetConnection().GetFloor().transform)
+        //    {
+        //        targetPosition = new Vector3(hit.point.x, hit.point.y + 0.5f, hit.point.z);
+        //        pursuitBehavior.SetTarget(targetPosition);
                 
-            }
-        }
+        //    }
+        //}
     }
 
     void FixedUpdate()
@@ -88,6 +93,13 @@ public class LeaderController : MonoBehaviour
 
         if (isPursuitActive && !pursuitBehavior.HasLeaderReachedTarget())
         {
+            if (isEncircleHumanActive)
+            {
+                
+                pursuitBehavior.target = encirclingBehavior.GetTargetPosition(currentHuman?.GetBoid(), encircleAngle, encircleDistance);
+                targetPosition = pursuitBehavior.target != null ? pursuitBehavior.target.Value : Vector3.zero;
+            }
+
             if (pursuitBehavior.target != null)
             {
                 if (pursuitInferenceAgent == null)

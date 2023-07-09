@@ -13,6 +13,7 @@ public class DroneLaserUIManager : MonoBehaviour
     public bool waitingForActivate = true;
     public bool waitingForWanderWithSwarm = false;
     public bool waitingForGoHome = false;
+    public bool waitingForEncircling = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,8 @@ public class DroneLaserUIManager : MonoBehaviour
         EnableWanderWithSwarm(false);
         waitingForGoHome = false;
         EnableGoHome(false);
+        waitingForEncircling = false;
+        EnableEncircling(false);
     }
 
     public void EnableStateMachine(bool started)
@@ -40,6 +43,8 @@ public class DroneLaserUIManager : MonoBehaviour
         EnableWanderWithSwarm(false);
         waitingForGoHome = false;
         EnableGoHome(false);
+        waitingForEncircling = false;
+        EnableEncircling(false);
     }
 
     // Update is called once per frame
@@ -59,6 +64,8 @@ public class DroneLaserUIManager : MonoBehaviour
                 EnableWanderWithSwarm(true);
                 waitingForGoHome = true;
                 EnableGoHome(true);
+                waitingForEncircling = true;
+                EnableEncircling(true);
                 swarmController.ActivateSwarm();
             }
         } else
@@ -80,6 +87,8 @@ public class DroneLaserUIManager : MonoBehaviour
                 EnableWanderWithSwarm(false);
                 waitingForGoHome = true;
                 EnableGoHome(true);
+                waitingForEncircling = true;
+                EnableEncircling(true);
                 swarmController.WanderWithSwarm();
             }
         } else
@@ -101,12 +110,38 @@ public class DroneLaserUIManager : MonoBehaviour
                 EnableWanderWithSwarm(false);
                 waitingForGoHome = false;
                 EnableGoHome(false);
+                waitingForEncircling = false;
+                EnableEncircling(false);
                 swarmController.GoHome();
             }
         } else
         {
             waitingForGoHome = false;
             EnableGoHome(false);
+        }
+
+        if (waitingForEncircling)
+        {
+            var dist1 = GetDistanceToHuman(transform.Find("EncircleHuman").position, human1);
+            var dist2 = GetDistanceToHuman(transform.Find("EncircleHuman").position, human2);
+
+            if (dist1 < 0.4f || dist2 < 0.4f)
+            {
+                waitingForActivate = false;
+                EnableActivate(false);
+                waitingForWanderWithSwarm = true;
+                EnableWanderWithSwarm(true);
+                waitingForGoHome = true;
+                EnableGoHome(true);
+                waitingForEncircling = false;
+                EnableEncircling(false);
+                swarmController.EncircleHuman();
+            }
+        }
+        else
+        {
+            waitingForEncircling = false;
+            EnableEncircling(false);
         }
     }
 
@@ -130,6 +165,14 @@ public class DroneLaserUIManager : MonoBehaviour
     {
         var lb = transform.Find("GoHome").GetComponent<LaserBehaviour>();
         var lr = transform.Find("GoHome").GetComponent<LaserRectangle>();
+        lb.visible = enable;
+        lr.drawGizmos = enable;
+    }
+
+    private void EnableEncircling(bool enable)
+    {
+        var lb = transform.Find("EncircleHuman").GetComponent<LaserBehaviour>();
+        var lr = transform.Find("EncircleHuman").GetComponent<LaserRectangle>();
         lb.visible = enable;
         lr.drawGizmos = enable;
     }

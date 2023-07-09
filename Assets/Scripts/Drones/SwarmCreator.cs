@@ -150,11 +150,11 @@ public class SwarmCreator : MonoBehaviour
     {
         int idCounter = 1;
         float step = 0.5f;
-        float position = 0;
+        float position = -3.5f;
         for (var i = 0; i < number; i++)
         {
             var drone = CreateDrone(idCounter++, false);
-            drone.transform.Find("Drone").position = new Vector3(position, 0, 4);
+            drone.transform.Find("Drone").position = new Vector3(-2, 0, position);
             position += step;
         }
     }

@@ -148,6 +148,15 @@ public class SwarmController : MonoBehaviour
         }
     }
 
+    public void EncircleHuman()
+    {
+        foreach (Transform drone in transform)
+        {
+            var transportStateMachine = drone.GetComponentInChildren<TransportStateMachine>();
+            transportStateMachine.Fire(TransportStateMachine.Trigger.EncircleHuman);
+        }
+    }
+
     public void SwitchToUpperFence()
     {
         foreach (Transform drone in transform)
