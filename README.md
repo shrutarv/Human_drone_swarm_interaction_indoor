@@ -26,3 +26,6 @@ station, walls, or shelves.
 <p align="center">
   <img src="media/swarm_rules.svg" width = "650" />  
 </p>
+
+# Code explanation
+The code uploaded is for the unity system only.
