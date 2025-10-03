@@ -1,0 +1,77 @@
+<svg width="721" height="533" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <rect fill="#DDDDDD" stroke="#000" x="9" y="15" width="699" height="186" id="svg_8"/>
+  <rect fill="#EDFFFF" x="47.00001" y="61" width="614.99999" height="127.99999" id="svg_2" stroke="#000"/>
+  <rect fill="#fff" x="62" y="79" width="254" height="38" id="svg_3" stroke="#000"/>
+  <rect fill="#fff" x="374" y="78" width="263" height="39" id="svg_4" stroke="#000"/>
+  <text fill="#000000" stroke="#000" stroke-width="0" x="391" y="103" id="svg_5" font-size="17" font-family="Noto Sans JP" text-anchor="start" xml:space="preserve">Real Time Object Representation</text>
+  <text fill="#000000" stroke="#000" x="101" y="101" id="svg_6" stroke-width="0" font-size="17" font-family="Noto Sans JP" text-anchor="start" xml:space="preserve">Virtual 3D Representation</text>
+  <text fill="#000000" stroke="#ffffff" x="284" y="153" id="svg_10" stroke-width="0" font-size="17" font-family="Noto Sans JP" text-anchor="start" xml:space="preserve">Virtual 3D Space</text>
+  <text fill="#000000" stroke="#000" x="53" y="46" id="svg_11" stroke-width="0" font-size="17" font-family="Noto Sans JP" text-anchor="start" xml:space="preserve">Unity</text>
+  <path id="svg_29" d="m255.61405,260.53741" opacity="undefined" stroke-width="3" stroke="#000" fill="none"/>
+  <path fill="none" stroke="#000" opacity="NaN" d="m264.8448,263.22971" id="svg_32"/>
+  <path id="svg_15" d="m-262.71227,123.93401c-0.04006,-0.04006 -0.0348,-0.06432 0.06259,-0.28887c0.04918,-0.11339 0.08942,-0.20946 0.08942,-0.21348c0,-0.00403 -0.1358,-0.00732 -0.30178,-0.00732l-0.30178,0l0,-0.21237l0,-0.21237l0.30418,0c0.23454,0 0.30156,-0.0064 0.29274,-0.02794c-0.00629,-0.01537 -0.04919,-0.11735 -0.09534,-0.22663c-0.08699,-0.20599 -0.08696,-0.26123 0.00013,-0.27836c0.04334,-0.00852 0.71814,0.6462 0.74134,0.71928c-0.22477,0.26093 -0.49345,0.53406 -0.74094,0.77489c-0.01305,0 -0.0358,-0.01207 -0.05055,-0.02683l0,0l-0.00001,0z" stroke="#000" fill="none"/>
+  <rect stroke="#000" id="svg_19" height="39.08654" width="68.89423" y="247.07692" x="63.40385" fill="#ffffff"/>
+  <rect fill="#DDDDDD" stroke="#000" x="13.38462" y="328.84616" width="699" height="186" id="svg_42"/>
+  <rect stroke="#000" fill="#EDFFFF" x="221.30769" y="357.6923" width="478.07692" height="127.99999" id="svg_45"/>
+  <rect stroke="#000" fill="#fff" x="232.46154" y="381.07693" width="85.53846" height="38" id="svg_46"/>
+  <rect stroke="#000" fill="#fff" x="25.53846" y="380.30771" width="186.3077" height="41.84615" id="svg_47"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="17" stroke-width="0" id="svg_48" y="406.46154" x="55.69231" stroke="#000" fill="#000000">Unmarked Objects</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="17" stroke-width="0" id="svg_49" y="404.92308" x="239.69231" stroke="#000" fill="#000000">Packages</text>
+  <rect stroke="#000" fill="#fff" x="337.07693" y="381.07693" width="85.53846" height="38" id="svg_50"/>
+  <rect stroke="#000" fill="#fff" x="439.38463" y="381.07693" width="135.53845" height="38" id="svg_51"/>
+  <rect stroke="#000" fill="#fff" x="590.15385" y="381.84617" width="85.53846" height="38" id="svg_52"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="17" stroke-width="0" id="svg_53" y="405.69231" x="616.46154" stroke="#000" fill="#000000">UAVs</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="17" stroke-width="0" id="svg_56" y="406.46154" x="447.84615" stroke="#000" fill="#000000">Recharge Station</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="17" stroke-width="0" id="svg_57" y="404.15385" x="351.84615" stroke="#000" fill="#000000">Humans</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="17" stroke-width="0" id="svg_58" y="459.53846" x="388" stroke="#000" fill="#000000">Marked Objects</text>
+  <rect stroke="#000" id="svg_59" height="39.08654" width="145.04809" y="247.07692" x="207.24999" fill="#ffffff"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="17" stroke-width="0" id="svg_60" y="272.07692" x="228.30769" stroke="#000" fill="#000000">MoCap System</text>
+  <rect stroke="#000" id="svg_61" height="39.08654" width="84.27884" y="248.61538" x="432.63462" fill="#ffffff"/>
+  <rect stroke="#000" id="svg_62" height="39.08654" width="68.89423" y="247.69231" x="585.09617" fill="#ffffff"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="17" stroke-width="0" id="svg_63" y="272.84615" x="451.38462" stroke="#000" fill="#000000">MQTT</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="17" stroke-width="0" id="svg_64" y="273.69231" x="603.61538" stroke="#000" fill="#000000">ROS</text>
+  <g transform="rotate(-88.5641 169.432 264.843)" id="svg_69" stroke="null">
+   <path id="svg_65" d="m175.69953,275.56933l-6.60645,24.34919l-5.92906,-24.76272l12.53551,0.41353z" fill="#000000" stroke="#000"/>
+   <line id="svg_66" y2="279.34304" x2="169.4241" y1="229.76759" x1="168.33744" fill="none" stroke="#000"/>
+   <path id="svg_67" d="m175.69953,275.56933l-6.60645,24.34919l-5.92906,-24.76272l12.53551,0.41353z" fill="#000000" stroke="#000"/>
+   <line id="svg_68" y2="279.34304" x2="169.4241" y1="229.76759" x1="168.33744" fill="none" stroke="#000"/>
+  </g>
+  <text fill="#000000" stroke="#000" stroke-width="0" x="78" y="271.2" id="svg_1" font-size="17" font-family="Noto Sans JP" text-anchor="start" xml:space="preserve">Laser</text>
+  <g transform="rotate(-88.5641 393.444 264.843)" id="svg_14" stroke="null">
+   <path id="svg_7" d="m400.66175,276.19186l-7.60733,25.76324l-6.82732,-26.20078l14.43465,0.43755l0,-0.00001z" fill="#000000" stroke="#000"/>
+   <line id="svg_9" y2="280.18473" x2="393.43558" y1="227.73025" x1="392.18429" fill="none" stroke="#000"/>
+   <path id="svg_12" d="m400.66175,276.19186l-7.60733,25.76324l-6.82732,-26.20078l14.43465,0.43755l0,-0.00001z" fill="#000000" stroke="#000"/>
+   <line id="svg_13" y2="280.18473" x2="393.43558" y1="227.73025" x1="392.18429" fill="none" stroke="#000"/>
+  </g>
+  <g transform="rotate(179.815 96.795 224.046)" id="svg_34" stroke="null">
+   <path fill="#000000" d="m89.29475,217.0279l7.50001,-13.13483l7.50001,13.13483l-15.00003,0l0.00001,0z" id="svg_26" stroke="#000"/>
+   <line fill="none" x1="97.12976" y1="216.54681" x2="97.12976" y2="244.19905" id="svg_31" stroke="#000"/>
+  </g>
+  <g transform="rotate(179.815 93.795 307.046)" id="svg_43" stroke="null">
+   <path fill="#000000" d="m86.29475,300.0279l7.50002,-13.13483l7.50001,13.13483l-15.00003,0z" id="svg_35" stroke="#000"/>
+   <line fill="none" x1="94.12976" y1="299.54681" x2="94.12976" y2="327.19905" id="svg_36" stroke="#000"/>
+  </g>
+  <path fill="#000000" d="m518.14999,266.54653l18.84462,-7.49982l0,3.7499l27.31078,0l0,-3.7499l18.84461,7.49982l-18.84461,7.49978l0,-3.74989l-27.31078,0l0,3.74989l-18.84462,-7.49978z" id="svg_44" stroke="#000"/>
+  <path transform="rotate(89.8732 468.369 226.015)" fill="#000000" stroke-width="0" d="m445.90373,226.01541l13.02639,-9.50117l0,4.75057l18.87865,0l0,-4.75057l13.02639,9.50117l-13.02639,9.50112l0,-4.75056l-18.87865,0l0,4.75056l-13.02639,-9.50112z" id="svg_54" stroke="#000"/>
+  <g transform="rotate(179.815 621.882 334.05)" id="svg_71" stroke="null">
+   <path fill="#000000" d="m614.38236,317.62808l7.50002,-30.73529l7.50001,30.73529l-15.00003,0z" id="svg_55" stroke="#000"/>
+   <line fill="none" x1="622.21737" y1="316.50235" x2="622.21737" y2="381.20815" id="svg_70" stroke="#000"/>
+  </g>
+  <g transform="rotate(179.815 93.795 307.046)" id="svg_74" stroke="null">
+   <path fill="#000000" d="m86.29475,300.0279l7.50002,-13.13483l7.50001,13.13483l-15.00003,0z" id="svg_72" stroke="#000"/>
+   <line fill="none" x1="94.12976" y1="299.54681" x2="94.12976" y2="327.19905" id="svg_73" stroke="#000"/>
+  </g>
+  <g transform="rotate(179.815 93.795 307.046)" id="svg_80" stroke="null">
+   <path fill="#000000" d="m86.29475,300.0279l7.50002,-13.13483l7.50001,13.13483l-15.00003,0z" id="svg_78" stroke="#000"/>
+   <line fill="none" x1="94.12976" y1="299.54681" x2="94.12976" y2="327.19905" id="svg_79" stroke="#000"/>
+  </g>
+  <g transform="rotate(-0.403626 270.925 321.52)" id="svg_83" stroke="null">
+   <path fill="#000000" d="m263.4249,309.80483l7.50002,-21.92642l7.50001,21.92642l-15.00003,0z" id="svg_81" stroke="#000"/>
+   <line fill="none" x1="271.2599" y1="309.00173" x2="271.2599" y2="355.16257" id="svg_82" stroke="#000"/>
+  </g>
+  <text fill="#000000" stroke="#000" x="48" y="500.2" id="svg_84" stroke-width="0" font-size="17" font-family="Noto Sans JP" text-anchor="start" xml:space="preserve">Test Area</text>
+ </g>
+
+</svg>
