@@ -10,8 +10,19 @@ for localization, inter-process communication and visualization. Multiple experi
 https://github.com/user-attachments/assets/b4f319a2-ae60-4465-bb01-18a791da08a8
 
 # Architecture
-The architecture used to implement the scenario shown in above video. 
+Architecture used for automating and visualizing the
+task of transporting multiple virtual packages from source to destination
+using a UAV swarm. 
 
 <p align="center">
   <img src="media/architecture.svg" width = "650" />  
+</p>
+
+# Swarm algorithm
+ Schematic representation of the three basic rules for
+simulated swarm behavior. Mobile obstacles are people
+moving with headgear, and static obstacles could be the charging
+station, walls, or shelves.
+<p align="center">
+  <img src="media/swarm_rules.svg" width = "650" />  
 </p>
