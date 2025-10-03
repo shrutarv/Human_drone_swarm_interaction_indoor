@@ -6,3 +6,12 @@ UAV technology, e.g., localization, control, and computer vision, but less resea
 enhance decision-making in an Internet of Things framework and automate time-consuming and redundant tasks in the industry. However, there is a gap between the technological developments of UAVs and their 
 integration into the supply chain. Therefore, this work focuses on automating the task of transporting packages utilizing a swarm of small UAVs operating alongside humans. MoCap system, ROS, and unity are used 
 for localization, inter-process communication and visualization. Multiple experiments are performed with the UAVs in wander and swarm mode in a warehouse like environment.
+
+https://github.com/user-attachments/assets/b4f319a2-ae60-4465-bb01-18a791da08a8
+
+# Architecture
+The architecture used to implement the scenario shown in above video. 
+
+<p align="center">
+  <img src="media/architecture.jpg" width = "650" />  
+</p>
