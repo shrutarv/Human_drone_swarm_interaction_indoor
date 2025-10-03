@@ -13,5 +13,5 @@ https://github.com/user-attachments/assets/b4f319a2-ae60-4465-bb01-18a791da08a8
 The architecture used to implement the scenario shown in above video. 
 
 <p align="center">
-  <img src="media/architecture.jpg" width = "650" />  
+  <img src="media/architecture.svg" width = "650" />  
 </p>
